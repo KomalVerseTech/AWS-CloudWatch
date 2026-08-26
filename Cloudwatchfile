@@ -1,3 +1,135 @@
 # What is Monitoring ?
 Monitoring means continuously checking the health, performace and behavior of your application and infrastructure.
 
+# What is AWS CloudWatch ?
+- Amazon Cloudwatch is an AWS monitoring and observability service.
+- CloudWatch helps you collect and monitor: Metrics, Logs, Alarms, Events, Dashboards.
+                    AWS ACCOUNT
+                        │
+        ┌───────────────┼────────────────┐
+        │               │                │
+        ▼               ▼                ▼
+      EC2              ECS              RDS
+   Application       Containers       Database
+        │               │                │
+        │               │                │
+        └───────────────┼────────────────┘
+                        │
+                        ▼
+                ┌─────────────────┐
+                │   CloudWatch    │
+                │                 │
+                │  ┌───────────┐  │
+                │  │  Metrics  │  │
+                │  └───────────┘  │
+                │                 │
+                │  ┌───────────┐  │
+                │  │   Logs    │  │
+                │  └───────────┘  │
+                │                 │
+                │  ┌───────────┐  │
+                │  │  Alarms   │  │
+                │  └───────────┘  │
+                │                 │
+                │  ┌───────────┐  │
+                │  │ Dashboards│  │
+                │  └───────────┘  │
+                └────────┬────────┘
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+        Notification             Monitoring
+        / Action                  Dashboard
+              │
+              ▼
+             SNS
+              │
+              ▼
+        Email / Alert
+
+# Cloudwatch Components:
+1. CloudWatch Metrics 📊
+A metric is a numerical measurement of a resource or application
+Examples:
+CPUUtilization = 65%
+MemoryUtilization = 72%
+NetworkIn
+NetworkOut
+RequestCount = 500
+
+2. Dimensions:
+A dimension is an attribute used to identify a specific metric.
+
+3. CloudWatch Nampespace:
+A namespace is a container/category for CloudWatch metrics.
+
+4. CloudWatch Logs 📋
+Logs = detailed application/service activity.
+Example:
+Application started
+User request received
+Database connection failed
+Exception occurred
+
+5. Log Group
+A Log Group is a container that stores related log streams.
+Log Group = Folder
+
+6. Log Stream
+A Log Stream is a sequence of log events coming from one source.
+Log Stream = File inside the folder
+
+             ECS Service
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+      Task-1    Task-2    Task-3
+        │         │         │
+        ▼         ▼         ▼
+      Logs      Logs      Logs
+        │         │         │
+        └─────────┼─────────┘
+                  ▼
+       CloudWatch Log Group
+         /aws/ecs/java-demo
+                  │
+        ┌─────────┼─────────┐
+        ▼         ▼         ▼
+     Stream-1  Stream-2  Stream-3
+
+7. Alarm
+A CloudWatch Alarm continuously checks a metric and takes an action when the metric crosses a defined threshold.
+EC2
+ │
+ │ CPU Utilization = 85%
+ ▼
+CloudWatch Metric
+ │
+ ▼
+CloudWatch Alarm
+ │
+ │ Condition: CPU > 80%
+ ▼
+ALARM STATE
+ │
+ ▼
+SNS
+ │
+ ▼
+Email Notification
+
+8. Dashboard
+┌─────────────────────────────────────────┐
+│          AWS DEVOPS DASHBOARD           │
+├─────────────────────────────────────────┤
+│                                         │
+│ EC2 CPU             ECS CPU             │
+│    📈                  📈              │
+│                                         │
+│ ECS Memory           RDS CPU            │
+│    📈                  📈              │
+│                                         │
+│ ALB Requests         RDS Connections    │
+│    📊                  📊              │
+│                                         │
+└─────────────────────────────────────────┘
