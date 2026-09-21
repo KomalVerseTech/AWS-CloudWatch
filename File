@@ -197,3 +197,19 @@ ALARM
 
 3. INSUFFICIENT_DATA
 CloudWatch does not currently have enough data to determine the state
+
+# Create CloudWatch Dashboard
+CloudWatch → Dashboards
+Name: DevOps-EC2-Monitoring
+
+┌─────────────────────────────────────┐
+│      DevOps EC2 Monitoring          │
+├──────────────────┬──────────────────┤
+│ CPU Utilization  │ Network In       │
+│                  │                  │
+│      Graph       │      Graph       │
+├──────────────────┼──────────────────┤
+│ Network Out      │ Status Check     │
+│                  │                  │
+│      Graph       │      Graph       │
+└──────────────────┴──────────────────┘
