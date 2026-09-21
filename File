@@ -1,0 +1,136 @@
+# What is AWS CloudWatch?
+Amazon CloudWatch is an AWS monitoring and observability service.
+It helps you monitor:
+EC2
+Lambda
+RDS
+ECS
+EKS
+Application performance
+Logs
+Metrics
+Alarms
+
+# Why Do We Need CloudWatch?
+Without CloudWatch:
+EC2
+ ↓
+SSH
+ ↓
+Login
+ ↓
+Run commands
+ ↓
+Check CPU
+
+With CloudWatch:
+EC2
+ ↓
+CloudWatch
+ ↓
+Metrics
+ ↓
+Dashboard
+
+# CloudWatch Architecture
+                    AWS Resources
+                         |
+        ┌────────────────┼────────────────┐
+        ↓                ↓                ↓
+       EC2             RDS             Lambda
+        |                |                |
+        └────────────────┼────────────────┘
+                         ↓
+                    CloudWatch
+                         |
+        ┌────────────────┼────────────────┐
+        ↓                ↓                ↓
+     Metrics           Logs             Alarms
+        |
+        ↓
+    Dashboard
+
+1. What is Metric ?
+A metric is a measurement of a resource or application.
+For EC2, examples are:
+CPUUtilization
+NetworkIn
+NetworkOut
+StatusCheckFailed
+
+Example:
+CPUUtilization = 35%
+This is a metric value.
+
+# Important EC2 Metrics
+1. CPUUtilization
+CPUUtilization = 25% (EC2 instance's measured CPU utilization is 25%)
+2. NetworkIn
+NetworkIn = 500 MB
+It represents network traffic received by the instance during the measurement period.
+Example: 
+Users
+ ↓
+EC2
+
+3. NetworkOut
+NetworkOut means network traffic sent from the EC2 instance.
+EC2
+ ↓
+Response
+ ↓
+Users
+
+4. StatusCheckFailed
+If a status check fails, CloudWatch can expose that information as a metric.
+
+# What is a Namespace?
+A namespace is a container/category where related CloudWatch metrics are organized.
+For EC2: AWS/EC2
+For RDS: AWS/RDS
+For Lambda: AWS/Lambda
+
+# What is a Dimension?
+A dimension helps identify or filter a metric.
+For example: InstanceId = i-0123456789abcdef
+
+# Metric
+Numerical measurement
+CPU = 70%
+Memory = 60%
+Network = 500 MB
+
+# Log
+Detailed event/application information
+Example:
+Application started
+User login successful
+Database connection failed
+HTTP 500 error
+
+# Practical 1
+Monitor an EC2 Instance Using CloudWatch
+1. Launch an EC2 Instance
+Name: cloudwatch-demo
+
+2. Go to Cloudwatch -> Metrics -> Classic Metrics
+Check CPUUtilization
+
+CPU %
+100 |
+ 90 |
+ 80 |
+ 70 |
+ 60 |
+ 50 |
+ 40 |       /\
+ 30 |  /\  /  \
+ 20 |_/  \/    \_
+ 10 |
+  0 +----------------
+       Time
+
+3. Check CPU: top
+4. controlled temporary workload:
+yes > /dev/null
+5. open another terminal and check cpu: top
