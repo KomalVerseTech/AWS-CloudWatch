@@ -134,3 +134,66 @@ CPU %
 4. controlled temporary workload:
 yes > /dev/null
 5. open another terminal and check cpu: top
+
+# Practical 2:
+Create a CloudWatch Alarm
+Scenario: If CPU utilization goes above 70%, CloudWatch should generate an alarm.
+
+Architecture:
+
+EC2
+ ↓
+CPUUtilization
+ ↓
+CloudWatch
+ ↓
+Threshold = 70%
+ ↓
+Alarm
+
+Step 1: Go to:
+
+CloudWatch → Metrics → All metrics → EC2
+Select: CPUUtilization
+
+Step 2 — Create Alarm
+Data Source: Metrics & Select Metrics
+
+Step 3: Set Threshold
+Greater than 70 %
+
+# What is an Alarm?
+An alarm is a rule that evaluates a metric against a threshold.
+
+Metric:
+CPUUtilization
+
+Condition:
+> 70%
+
+Result:
+ALARM
+
+# Alarm States
+1. OK: Condition is normal
+CPU = 30%
+
+Threshold = 70%
+
+30 < 70
+ ↓
+OK
+
+2. ALARM
+Condition has crossed the configured threshold
+
+CPU = 85%
+
+Threshold = 70%
+
+85 > 70
+ ↓
+ALARM
+
+3. INSUFFICIENT_DATA
+CloudWatch does not currently have enough data to determine the state
